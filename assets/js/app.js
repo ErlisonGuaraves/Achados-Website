@@ -200,9 +200,8 @@
   function disclaimer() {
     return '' +
       '<p class="disclaimer">' +
-        'O preço e a disponibilidade podem mudar a qualquer momento na loja. Podemos receber comissão ' +
-        'pela compra, sem custo adicional para você. ' +
-        '<a href="#/termos">Termos</a> · <a href="#/privacidade">Privacidade</a>' +
+        'O preço e a disponibilidade podem mudar a qualquer momento na loja. ' +
+        '<a href="#/termos">Leia os Termos</a> · <a href="#/privacidade">Privacidade</a>' +
       '</p>';
   }
 
@@ -241,7 +240,6 @@
             '<div class="meta-row">' +
               '<span class="chip chip--store"><span class="chip__dot" aria-hidden="true"></span>Oferta na ' + esc(storeOf(offer).name) + '</span>' +
               (offer.editorialNote ? '<span class="chip chip--editorial">' + esc(offer.editorialNote) + '</span>' : '') +
-              (published ? '<span class="meta">publicada ' + esc(published) + '</span>' : '') +
             '</div>' +
 
             '<h1 class="offer__title">' + esc(offer.title) + '</h1>' +

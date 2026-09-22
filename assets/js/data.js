@@ -47,7 +47,7 @@ window.CAROL = {
       current: 256.41,                // exemplo — confirmar na loja
       previous: 329.90,               // exemplo — remover se o preço cheio não for real
       currency: 'BRL',
-      installments: 'em até 6x sem juros'
+      installments: ''
     },
 
     coupon: null,                     // { code: 'CASA15', description: '...' }
