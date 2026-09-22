@@ -123,6 +123,20 @@
 
   /* ---------------------------------------------------------- componentes */
 
+  /* AVIF e WebP quando o navegador aceitar, JPEG como fallback universal.
+     Se nada carregar, cai no placeholder vetorial em vez de mostrar ícone quebrado. */
+  function productImage(offer) {
+    const sources = (offer.imageSources || []).map(function (s) {
+      return '<source srcset="' + esc(s.src) + '" type="' + esc(s.type) + '">';
+    }).join('');
+    return '' +
+      '<picture>' + sources +
+        '<img src="' + esc(offer.imageUrl) + '" alt="' + esc(offer.imageAlt) + '" ' +
+             'width="1000" height="1000" fetchpriority="high" decoding="async" ' +
+             'onerror="this.onerror=null; this.src=\'assets/img/placeholder.svg\';">' +
+      '</picture>';
+  }
+
   function priceBlock(offer) {
     const current  = money(offer.price.current);
     const previous = money(offer.price.previous);
@@ -231,10 +245,7 @@
       '<div class="wrap">' +
         '<article class="offer">' +
           '<div class="offer__media">' +
-            '<div class="media-frame">' +
-              '<img src="' + esc(offer.imageUrl) + '" alt="' + esc(offer.imageAlt) + '" ' +
-                   'width="1000" height="1000" fetchpriority="high" decoding="async">' +
-            '</div>' +
+            '<div class="media-frame">' + productImage(offer) + '</div>' +
           '</div>' +
 
           '<div class="offer__decision">' +

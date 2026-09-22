@@ -21,13 +21,14 @@ cupom exige `http://` ou `https://`.
 | `assets/css/styles.css` | Estilo completo, tokens no `:root` |
 | `assets/js/data.js` | **Os dados da oferta.** É o único arquivo que você edita no dia a dia |
 | `assets/js/app.js` | Renderização, rotas em hash, métricas |
-| `assets/img/` | Foto do produto e logo |
+| `assets/img/` | Foto do produto (AVIF, WebP, JPEG) e os vetores da marca |
 
 ## Antes de publicar
 
-1. **Salve a logo** em `assets/img/logo.png` (quadrada, fundo transparente ou
-   claro). Enquanto o arquivo não existir, o cabeçalho mostra um símbolo
-   provisório no lugar.
+1. **Troque a logo.** O cabeçalho usa `assets/img/logo.svg`, um selo vetorial
+   provisório que desenhei com as cores da marca. Para usar a sua: salve o
+   arquivo em `assets/img/` e aponte o `src` do `.brand__logo` no `index.html`
+   para ele. Se for SVG, dá para simplesmente sobrescrever o `logo.svg`.
 2. **Confira o preço** em `assets/js/data.js`. `price.current`,
    `price.previous`, `price.installments` e `shipping` são valores de exemplo.
    Campo que você não puder confirmar deve ficar `null` — a interface esconde o
@@ -36,6 +37,35 @@ cupom exige `http://` ou `https://`.
    "preço verificado há X" a partir deles).
 4. Troque as URLs `https://achadinhosdacarol.com.br/` em `index.html`
    (`canonical` e `og:url`) pelo domínio real.
+
+## Imagens
+
+Tudo que é interface é vetor: `logo.svg` (marca), `favicon.svg` (aba do
+navegador), `placeholder.svg` (usado se a foto do produto falhar) e os ícones,
+que são `<svg>` inline no `app.js` — não custam requisição.
+
+A foto do produto é fotografia, então continua raster, servida por `<picture>`
+na melhor versão que o navegador aceitar:
+
+| Arquivo | Tamanho | Quem recebe |
+|---|---:|---|
+| `.avif` | 43 KB | navegadores atuais |
+| `.webp` | 49 KB | Safari mais antigo e afins |
+| `.jpg` | 76 KB | fallback universal e prévia no WhatsApp |
+
+Ao trocar de produto, gere os três a partir da foto original:
+
+```bash
+python3 -c "
+from PIL import Image
+im = Image.open('assets/img/SUA-FOTO.jpg').convert('RGB')
+im.save('assets/img/SUA-FOTO.webp', quality=82, method=6)
+im.save('assets/img/SUA-FOTO.avif', quality=60)"
+```
+
+Depois aponte `imageUrl` e `imageSources` em `data.js` para os novos arquivos.
+Só o `.jpg` precisa estar em `og:image` no `index.html` — as redes sociais não
+leem AVIF.
 
 ## Trocar a oferta
 

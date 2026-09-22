@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Foto do produto indisponível">
+  <title>Foto do produto indisponível</title>
+  <rect width="400" height="400" fill="#F7F4EF"/>
+  <g fill="none" stroke="#C3CCD5" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="128" y="142" width="144" height="116" rx="12"/>
+    <circle cx="166" cy="180" r="12"/>
+    <path d="M136 240l38-38 30 30 26-26 34 34"/>
+  </g>
+  <text x="200" y="300" text-anchor="middle" fill="#8D9AA7"
+        font-family="Inter, system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif"
+        font-size="20" font-weight="500">Foto indisponível</text>
+</svg>

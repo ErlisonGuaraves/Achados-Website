@@ -34,7 +34,11 @@ window.CAROL = {
     shortTitle: 'Jogo de panelas antiaderente 5 peças',
     category: 'Casa e cozinha',
 
-    imageUrl: 'assets/img/jogo-panelas-cabo-madeira.jpg',
+    imageUrl: 'assets/img/jogo-panelas-cabo-madeira.jpg',   // fallback universal
+    imageSources: [                                          // servidos antes do fallback
+      { type: 'image/avif', src: 'assets/img/jogo-panelas-cabo-madeira.avif' },
+      { type: 'image/webp', src: 'assets/img/jogo-panelas-cabo-madeira.webp' }
+    ],
     imageAlt: 'Jogo de panelas bege com acabamento marmorizado, cabos e pegadores em madeira clara, com tampas de vidro temperado',
 
     store: 'shopee',
