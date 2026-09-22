@@ -99,26 +99,15 @@
     }
   };
 
-  /* -------------------------------------------------------------- metadados */
+  /* -------------------------------------------------------------- metadados
+     O <head> já traz o título, a descrição e a prévia da oferta, que é o que
+     os robôs do WhatsApp leem (eles não executam JS). Aqui só ajustamos o que
+     muda ao navegar para Termos e Privacidade. */
 
-  function setMeta(meta) {
-    document.title = meta.title;
-    setTag('meta[name="description"]', 'content', meta.description);
-    setTag('meta[property="og:title"]', 'content', meta.title);
-    setTag('meta[property="og:description"]', 'content', meta.description);
-    setTag('meta[name="twitter:title"]', 'content', meta.title);
-    setTag('meta[name="twitter:description"]', 'content', meta.description);
-    if (meta.image) {
-      const abs = new URL(meta.image, location.href).href;
-      setTag('meta[property="og:image"]', 'content', abs);
-      setTag('meta[name="twitter:image"]', 'content', abs);
-    }
-    setTag('meta[property="og:url"]', 'content', location.href);
-    setTag('link[rel="canonical"]', 'href', location.href);
-  }
-  function setTag(selector, attr, value) {
-    const el = document.querySelector(selector);
-    if (el && value) el.setAttribute(attr, value);
+  function setMeta(title, description) {
+    document.title = title;
+    const el = document.querySelector('meta[name="description"]');
+    if (el) el.setAttribute('content', description);
   }
 
   /* ---------------------------------------------------------- componentes */
@@ -270,11 +259,7 @@
         '</article>' +
       '</div>';
 
-    setMeta({
-      title: offer.seo.title,
-      description: offer.seo.description,
-      image: offer.seo.ogImageUrl || offer.imageUrl
-    });
+    setMeta(offer.seo.title, offer.seo.description);
 
     track('offer_view', {
       offer_id: offer.id,
@@ -287,7 +272,7 @@
   function renderDoc(title, description, body) {
     main.innerHTML = '<div class="wrap"><article class="doc"><h1>' + esc(title) + '</h1>' + body +
       '<p class="doc__back"><a href="#/">Voltar para a oferta</a></p></article></div>';
-    setMeta({ title: title + ' — Achadinhos da Carol', description: description });
+    setMeta(title + ' — Achadinhos da Carol', description);
   }
 
   function renderError() {

@@ -10,6 +10,13 @@ python3 -m http.server 8000
 # abra http://localhost:8000
 ```
 
+## Publicar no Netlify
+
+Não há build. Arraste a pasta inteira para o painel do Netlify, ou conecte o
+repositório deixando o comando de build vazio e o diretório de publicação como
+`.` (a raiz). A prévia do link no WhatsApp funciona assim que o site estiver no
+ar em HTTPS.
+
 Abrir o `index.html` direto pelo `file://` também funciona, mas a cópia de
 cupom exige `http://` ou `https://`.
 
@@ -35,8 +42,10 @@ cupom exige `http://` ou `https://`.
    bloco em vez de exibir dado inventado.
 3. Ajuste `publishedAt` e `checkedAt` (a página mostra "publicada há X" e
    "preço verificado há X" a partir deles).
-4. Troque as URLs `https://achadinhosdacarol.com.br/` em `index.html`
-   (`canonical` e `og:url`) pelo domínio real.
+4. Se mudar o título ou a descrição da oferta em `data.js`, repita os mesmos
+   textos no `<title>`, na `description` e nas tags `og:` do `index.html`. São
+   elas que o WhatsApp lê ao montar a prévia do link — o robô dele não executa
+   JavaScript.
 
 ## Imagens
 
@@ -96,7 +105,6 @@ registrado. Para ligar ao GA4 ou Plausible, leia essa fila.
   esconder o link de afiliado, é preciso backend.
 - **Funcionar sem JavaScript.** A página é montada por JS. O `<noscript>` do
   `index.html` mantém os links da loja e do grupo acessíveis nesse caso.
-- **Open Graph por oferta.** As metatags iniciais são as do `index.html`. O JS
-  as atualiza depois de carregar, mas o WhatsApp e o Instagram leem o HTML
-  original — com uma oferta só, basta manter o `index.html` sincronizado com
-  `data.js`.
+- **Open Graph por oferta.** As tags `og:` vivem no `index.html` e valem para
+  a página inteira. Com uma oferta só isso basta; com várias, cada uma
+  precisaria do seu próprio HTML.

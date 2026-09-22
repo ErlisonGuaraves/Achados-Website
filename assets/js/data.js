@@ -63,8 +63,7 @@ window.CAROL = {
 
     seo: {
       title: 'Jogo de panelas antiaderente 5 peças com cabo amadeirado — Achadinhos da Carol',
-      description: 'Jogo de 5 panelas antiaderentes com tampas de vidro e cabo amadeirado. Veja o preço atual na Shopee.',
-      ogImageUrl: null
+      description: 'Jogo de 5 panelas antiaderentes com tampas de vidro e cabo amadeirado. Veja o preço atual na Shopee.'
     }
   }
 };
